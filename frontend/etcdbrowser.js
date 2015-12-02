@@ -1,6 +1,15 @@
 
 var app = angular.module("app", ["xeditable","ngCookies"]);
 
+function validate_json(value) {
+  try {
+    JSON.parse(value);
+    return true;
+  } catch (exception) {
+    return false;
+  }
+}
+
 app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$cookies) {
   var keyPrefix = '/v2/keys',
       statsPrefix = '/v2/stats';
@@ -72,6 +81,11 @@ app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$
     var value = prompt("Enter Property value", "");
     if(!name || name == "") return;
 
+    if(!validate_json(value)) {
+      $scope.error = "Invalid JSON syntax";
+      return;
+    }
+
     $http({method: 'PUT',
     	   url: $scope.getPrefix() + keyPrefix + node.key + (node.key != "/" ? "/" : "") + name,
     	   params: {"value": value}}).
@@ -82,6 +96,10 @@ app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$
   }
 
   $scope.updateNode = function(node,value){
+    if(!validate_json(value)) {
+      $scope.error = "Invalid JSON syntax";
+      return;
+    }
     $http({method: 'PUT',
       url: $scope.getPrefix() + keyPrefix + node.key,
       params: {"value": value}}).

@@ -94,6 +94,11 @@
     background: #f9f9f9;
 }
 
+
+.property-table {
+  width: 100%;
+}
+
 .property-table tr:hover{
     background: #BBBBBB;
 }
@@ -127,4 +132,23 @@ html, body {
 
 td {
   white-space: nowrap;
+}
+
+.property-table td {
+  vertical-align: top;
+  padding-top: 5px;
+}
+
+form.editable-wrap {
+  width: 78%;
+}
+
+form.editable-wrap div.editable-controls,
+form.editable-wrap .editable-controls input,
+form.editable-wrap .editable-controls textarea {
+  width: 100%;
+}
+
+form.editable-wrap .editable-controls textarea {
+  height: 80px;
 }
