@@ -83,7 +83,8 @@ function proxy(client_req, client_res) {
     hostname: etcdHost,
     port: etcdPort,
     path: client_req.url,
-    method: client_req.method
+    method: client_req.method,
+    headers: client_req.headers
   };
 
   // https/certs supprt

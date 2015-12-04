@@ -86,13 +86,15 @@ app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$
       return;
     }
 
-    $http({method: 'PUT',
-    	   url: $scope.getPrefix() + keyPrefix + node.key + (node.key != "/" ? "/" : "") + name,
-    	   params: {"value": value}}).
-    success(function(data) {
+    encoded_value = encodeURIComponent(value);
+    $http({
+      method: 'PUT',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      url: $scope.getPrefix() + keyPrefix + node.key + (node.key != "/" ? "/" : "") + name,
+      data: "value="+encoded_value
+    }).success(function(data) {
       $scope.loadNode(node);
-    }).
-    error(errorHandler);
+    }).error(errorHandler);
   }
 
   $scope.updateNode = function(node,value){
@@ -100,13 +102,17 @@ app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$
       $scope.error = "Invalid JSON syntax";
       return;
     }
-    $http({method: 'PUT',
-      url: $scope.getPrefix() + keyPrefix + node.key,
-      params: {"value": value}}).
-    success(function(data) {
+
+    var url = $scope.getPrefix() + keyPrefix + node.key;
+    encoded_value = encodeURIComponent(value);
+    $http({
+      method: 'PUT',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      url: url,
+      data: "value="+encoded_value
+    }).success(function(data) {
       $scope.loadNode(node);
-    }).
-    error(errorHandler);
+    }).error(errorHandler);
   }
 
   $scope.deleteNode = function(node){
