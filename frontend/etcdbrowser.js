@@ -226,4 +226,10 @@ app.controller('NodeCtrl', ['$scope','$http','$cookies', function($scope,$http,$
 
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3';
+}).directive('propertyForm', function () {
+  return {
+    link: function () {
+      $(".property-form").affix({offset: {top: $(".top-buffer").position().top} }).width($('.tree').width());
+    }
+  }
 });
