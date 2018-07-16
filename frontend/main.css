@@ -104,8 +104,11 @@
 }
 
 .prop-block {
-  height: 100%;
   overflow: auto;
+}
+
+.property-form {
+  top: 10px;
 }
 
 .col-md-6 .col-md-6 {
