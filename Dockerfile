@@ -12,7 +12,7 @@ RUN groupadd -g 1024 ebrowser && \
   chown -R ebrowser:ebrowser /app
 
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 8000
 
 USER 1024
 
